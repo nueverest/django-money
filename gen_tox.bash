@@ -9,13 +9,16 @@
 PYTHON_DICT=( "py26:python2.6" 
 	 		  "py27:python2.7" 
 			  "py32:python3.2" 
-			  "py33:python3.3" 
+			  "py33:python3.3"
+			  "py34:python3.4"
 			  "pypy:pypy" )
 
 # <id>:<version>
 DJANGO_DICT=( "django14:1.4.x" 
 			  "django15:1.5.x" 
-			  "django16:1.6.x" 
+			  "django16:1.6.x"
+			  "django17:1.7.x"
+			  "django18:1.8.x"
 			  "djangolatest:latest" )
 
 # <id>:<version>
@@ -24,8 +27,12 @@ PYMONEYED_DICT=( "pm04:0.4"
 				 "pmlatest:latest" )
 
 # condition[<id> <id> ...]: skip[<id> <id> ...]
-TOX_SKIP_CONDITIONS=( "pm04: py32 py33" 
-					  "py33 py32: django14")
+TOX_SKIP_CONDITIONS=( "pm04: py32 py33 py34" 
+					  "py34 py33 py32: django14"
+					  "py34: django15"
+					  "py34: django16"
+					  "py26: django17"
+					  "py26: django18")
 
 function test_conditions() {
 	for condition_item in "${TOX_SKIP_CONDITIONS[@]}"
@@ -107,6 +114,8 @@ deps=
 1.4.x  = Django>=1.4,<1.5
 1.5.x  = Django>=1.5,<1.6
 1.6.x  = Django>=1.6,<1.7
+1.7.x  = Django>=1.7,<1.8
+1.8.x  = Django>=1.8,<1.9
 latest = https://github.com/django/django/tarball/master
 
 [pymoneyed]
